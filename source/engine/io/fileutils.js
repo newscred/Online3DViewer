@@ -33,7 +33,9 @@ export function GetFileExtension (filePath)
 	let fileName = GetFileName (filePath);
 	let firstPoint = fileName.lastIndexOf ('.');
 	if (firstPoint === -1) {
-		return '';
+		// HOTFIX: When extension is not present in URL, assume it as .glb file
+		// Limits render support to only GLB for now as our file-server URL doesn't have file extensions
+		return 'glb';
 	}
 	let extension = fileName.substring (firstPoint + 1);
 	return extension.toLowerCase ();
